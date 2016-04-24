@@ -17,7 +17,7 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 
 public class SaveImageOperation implements Operation {
     private static final String DEFAULT_PATH = "image {0,date,Y.M.d H.m.s S}.jpg";
-    private static final long WRITE_INTERVAL_MILLIS = 200;
+    private static final long WRITE_INTERVAL_MILLIS = 0;
     public static final String KEY_SAVE_IMAGE = "shouldSaveImage";
     public static final String KEY_GRIP = "GRIP";
     private static Logger logger = Logger.getLogger(SaveImageOperation.class.getName());
@@ -65,7 +65,7 @@ public class SaveImageOperation implements Operation {
         checkArgument(pathPattern != null && !pathPattern.isEmpty(), "Input path must not be empty");
 
         NetworkTable gripTable = NetworkTable.getTable(KEY_GRIP);
-        if (!gripTable.getBoolean(KEY_SAVE_IMAGE, true)) {
+        if (!gripTable.getBoolean(KEY_SAVE_IMAGE, false)) {
             return;
         }
 
